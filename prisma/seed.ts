@@ -1,4 +1,4 @@
-import { prisma } from "../src/server/db";
+import { prisma } from '../src/server/db';
 
 async function main() {
   const enDante = await prisma.user.upsert({
@@ -8,7 +8,7 @@ async function main() {
       email: 'endante@test.com',
       username: 'EnDante',
     },
-  })
+  });
   const random = await prisma.user.upsert({
     where: { email: 'randomuser@prisma.io' },
     update: {},
@@ -16,8 +16,8 @@ async function main() {
       email: 'randomuser@test.io',
       username: 'Randomuser',
     },
-  })
-  console.log({ enDante, random })
+  });
+  console.log({ enDante, random });
 }
 
 main()
