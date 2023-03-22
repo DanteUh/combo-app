@@ -1,37 +1,35 @@
 import { type NextPage } from 'next';
 import Head from 'next/head';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { signIn, signOut, useSession } from 'next-auth/react';
 
 import { api } from '~/utils/api';
 import ComboListCard from '~/components/comboListCard';
-import AddComboListModal from '~/ui/addComboListModal';
+import AddComboListForm from '~/components/addComboListForm';
 
 const Home: NextPage = () => {
   // userId should not be hardcoded in the future
   // Just here for development purposes
   const userId = 'clf1bxlaa0000oz2ss6okg767';
-  const { data, isLoading } = api.comboList.getComboLists.useQuery({ userId });
+  const { data, isLoading, isError, refetch, isRefetchError } =
+    api.comboList.getComboLists.useQuery({
+      userId,
+    });
   const apiDeleteComboList = api.comboList.removeComboList.useMutation();
-
-  const [displayModal, setDisplayModal] = useState<boolean>(false);
-  const [comboLists, setComboLists] = useState<
-    {
-      id: number;
-      title: string;
-    }[]
-  >([]);
+  const [isCreatingList, setIsCreatingList] = useState<boolean>(false);
 
   const removeComboList = (id: number) => {
-    apiDeleteComboList.mutate({ id });
-    setComboLists(
-      comboLists?.filter((comboList) => {
-        return id !== comboList.id;
-      })
+    apiDeleteComboList.mutate(
+      { id },
+      {
+        onSuccess: () => {
+          refetchComboLists();
+        },
+      }
     );
   };
 
-  const renderComboLists = comboLists?.map(({ id, title }) => {
+  const renderComboLists = data?.map(({ id, title }) => {
     return (
       <ComboListCard
         key={id}
@@ -42,11 +40,11 @@ const Home: NextPage = () => {
     );
   });
 
-  useEffect(() => {
-    if (data) {
-      setComboLists(data);
-    }
-  }, [data]);
+  const refetchComboLists = () => {
+    refetch().catch((err: string) =>
+      console.error(`Something went wrong when refetching combo lists: ${err}`)
+    );
+  };
 
   return (
     <>
@@ -56,24 +54,29 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex min-h-screen flex-col items-center">
-        <AddComboListModal
-          show={displayModal}
-          setDisplayModal={setDisplayModal}
-        />
         <div className="container flex flex-col items-center gap-10 px-4 py-16">
           <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
             Combo <span className="text-[hsl(280,100%,70%)]">App</span>
           </h1>
+          <button
+            className="rounded-xl bg-green-600 bg-opacity-80 px-8 py-3 font-bold transition-all duration-300 hover:bg-opacity-100"
+            onClick={() => setIsCreatingList(true)}
+          >
+            Add Combo list
+          </button>
+          {isCreatingList && (
+            <AddComboListForm
+              userId={userId}
+              refetchComboLists={refetchComboLists}
+              setIsCreatingList={setIsCreatingList}
+            />
+          )}
           {isLoading ? (
             <div>Loading combolists...</div>
+          ) : isError || isRefetchError ? (
+            <div>An Error occured!</div>
           ) : (
             <>
-              <button
-                className="rounded-xl bg-green-600 bg-opacity-80 px-8 py-3 font-bold transition-all duration-300 hover:bg-opacity-100"
-                onClick={() => setDisplayModal(true)}
-              >
-                Add ComboList
-              </button>
               {renderComboLists}
               <div className="flex flex-col items-center gap-2">
                 <AuthShowcase />
