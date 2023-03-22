@@ -29,22 +29,23 @@ const Home: NextPage = () => {
     );
   };
 
+  const refetchComboLists = () => {
+    refetch().catch((err: string) =>
+      console.error(`Something went wrong when refetching combo lists: ${err}`)
+    );
+  };
+
   const renderComboLists = data?.map(({ id, title }) => {
     return (
       <ComboListCard
         key={id}
         id={id}
         title={title}
+        refetchComboLists={refetchComboLists}
         removeComboList={removeComboList}
       />
     );
   });
-
-  const refetchComboLists = () => {
-    refetch().catch((err: string) =>
-      console.error(`Something went wrong when refetching combo lists: ${err}`)
-    );
-  };
 
   return (
     <>
