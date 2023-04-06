@@ -53,18 +53,20 @@ const AddComboListForm: FC<IAddComboListForm> = ({
           New combo list
         </h2>
         <label htmlFor="title" className="mb-3 block">
-          List Title
+          List Title*
         </label>
         <input
           type="text"
           id="title"
           placeholder="List Title"
-          className="focus:border- w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base text-neutral-800 outline-none focus:border-2 focus:shadow-inner"
+          className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base text-neutral-800 outline-none focus:border-2"
           required
           aria-required
           {...register('title')}
         />
-        {errors.title?.message && <p>{errors.title?.message}</p>}
+        {errors.title?.message && (
+          <p className="text-red-400">{errors.title?.message}</p>
+        )}
       </div>
       <div>
         <button
