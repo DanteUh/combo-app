@@ -1,3 +1,4 @@
+import { comboRouter } from './routers/combo';
 import { createTRPCRouter } from '~/server/api/trpc';
 import { userRouter } from '~/server/api/routers/user';
 import { comboListRouter } from '~/server/api/routers/comboList';
@@ -10,6 +11,7 @@ import { comboListRouter } from '~/server/api/routers/comboList';
 export const appRouter = createTRPCRouter({
   user: userRouter,
   comboList: comboListRouter,
+  combo: comboRouter,
 });
 
 // export type definition of API

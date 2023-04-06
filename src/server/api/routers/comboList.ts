@@ -21,6 +21,20 @@ export const comboListRouter = createTRPCRouter({
       });
     }),
 
+  // Should be protected
+  getComboList: publicProcedure
+    .input(z.object({ id: z.number().int() }))
+    .query(({ input, ctx }) => {
+      return ctx.prisma.comboList.findUnique({
+        include: {
+          combos: true,
+        },
+        where: {
+          id: input.id,
+        },
+      });
+    }),
+
   addComboList: publicProcedure
     .input(
       z.object({

@@ -81,9 +81,9 @@ const ComboListCard: FC<IComboListCardProps> = ({
           </h2>
         </Link>
       )}
-      <div className="mt-5 flex w-full flex-row justify-between p-5 pt-0">
+      <div className="mt-5 flex w-full flex-row p-5 pt-0">
         <button
-          className="rounded-sm border border-red-600 bg-transparent py-1 px-5 transition-all duration-200 hover:bg-red-600"
+          className="mr-3 rounded-sm border border-red-600 bg-transparent py-1 px-5 transition-all duration-200 hover:bg-red-600"
           aria-label={`Delete ${title} combolist`}
           onClick={() => removeComboList(id)}
         >
