@@ -2,7 +2,7 @@
 import { type FC } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
+import { comboFormSchema, type ComboFormSchema } from '~/shared/formSchemas';
 
 interface IAddComboForm {
   defaultValues?: {
@@ -14,14 +14,6 @@ interface IAddComboForm {
   onSubmit: (data: any) => void;
 }
 
-const schema = z.object({
-  title: z.string().min(1, { message: 'Title is required' }),
-  notation: z.string().min(1, { message: 'Notation is required' }),
-  notes: z.string(),
-});
-
-type Schema = z.infer<typeof schema>;
-
 const ComboForm: FC<IAddComboForm> = ({
   setIsCreating,
   defaultValues,
@@ -31,8 +23,8 @@ const ComboForm: FC<IAddComboForm> = ({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Schema>({
-    resolver: zodResolver(schema),
+  } = useForm<ComboFormSchema>({
+    resolver: zodResolver(comboFormSchema),
   });
   const formTitle = defaultValues?.title
     ? defaultValues.title

@@ -3,8 +3,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
 import { useState, type FC } from 'react';
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
 import { api } from '~/utils/api';
+import { comboListSchema, type ComboListSchema } from '~/shared/formSchemas';
 
 interface IComboListCardProps {
   id: number;
@@ -12,12 +12,6 @@ interface IComboListCardProps {
   refetchComboLists: () => void;
   removeComboList: (id: number) => void;
 }
-
-const schema = z.object({
-  title: z.string().min(1, { message: 'Title is required' }),
-});
-
-type Schema = z.infer<typeof schema>;
 
 const ComboListCard: FC<IComboListCardProps> = ({
   id,
@@ -31,12 +25,12 @@ const ComboListCard: FC<IComboListCardProps> = ({
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<Schema>({
-    resolver: zodResolver(schema),
+  } = useForm<ComboListSchema>({
+    resolver: zodResolver(comboListSchema),
   });
   const updateComboList = api.comboList.updateComboList.useMutation();
 
-  const onSubmit = (data: Schema) => {
+  const onSubmit = (data: ComboListSchema) => {
     updateComboList.mutate(
       { title: data.title, id },
       {

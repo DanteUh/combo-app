@@ -1,21 +1,15 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
+import { api } from '~/utils/api';
 import { type FC } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-import { api } from '~/utils/api';
+import { comboListSchema, type ComboListSchema } from '~/shared/formSchemas';
 
 interface IAddComboListForm {
   userId: string;
   refetchComboLists: () => void;
   setIsCreatingList: (show: boolean) => void;
 }
-
-const schema = z.object({
-  title: z.string().min(1, { message: 'Required' }),
-});
-
-type Schema = z.infer<typeof schema>;
 
 const AddComboListForm: FC<IAddComboListForm> = ({
   setIsCreatingList,
@@ -26,12 +20,12 @@ const AddComboListForm: FC<IAddComboListForm> = ({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Schema>({
-    resolver: zodResolver(schema),
+  } = useForm<ComboListSchema>({
+    resolver: zodResolver(comboListSchema),
   });
   const addComboList = api.comboList.addComboList.useMutation();
 
-  const onSubmit = (data: Schema) => {
+  const onSubmit = (data: ComboListSchema) => {
     addComboList.mutate(
       { title: data.title, userId },
       {

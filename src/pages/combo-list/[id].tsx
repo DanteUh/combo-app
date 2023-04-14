@@ -5,15 +5,7 @@ import { useState } from 'react';
 import ComboForm from '~/components/comboForm';
 import ComboCard from '~/components/comboCard';
 import { api } from '~/utils/api';
-import { z } from 'zod';
-
-const schema = z.object({
-  title: z.string().min(1, { message: 'Title is required' }),
-  notation: z.string().min(1, { message: 'Notation is required' }),
-  notes: z.string(),
-});
-
-type Schema = z.infer<typeof schema>;
+import { type ComboFormSchema } from '~/shared/formSchemas';
 
 const ComboListPage: NextPage = () => {
   const comboListId = Number(useRouter().query.id);
@@ -30,7 +22,7 @@ const ComboListPage: NextPage = () => {
     );
   };
 
-  const onSubmit = (data: Schema) => {
+  const onSubmit = (data: ComboFormSchema) => {
     addComboToList.mutate(
       {
         title: data.title,
