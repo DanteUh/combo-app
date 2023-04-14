@@ -6,11 +6,13 @@ import { signIn, signOut, useSession } from 'next-auth/react';
 import { api } from '~/utils/api';
 import ComboListCard from '~/components/comboListCard';
 import AddComboListForm from '~/components/addComboListForm';
+import Image from 'next/image';
 
 const Home: NextPage = () => {
   // userId should not be hardcoded in the future
   // Just here for development purposes
   const userId = 'clf1bxlaa0000oz2ss6okg767';
+  const { data: sessionData } = useSession();
   const { data, isLoading, isError, refetch, isRefetchError } =
     api.comboList.getComboLists.useQuery({
       userId,
@@ -55,7 +57,20 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex min-h-screen flex-col items-center">
-        <div className="container flex flex-col items-center gap-10 px-4 py-16">
+        <div className="container relative flex flex-col items-center gap-10 px-4 py-16">
+          {sessionData?.user && (
+            <div className="flex flex-row items-center gap-3">
+              <Image
+                alt="profile image"
+                width={50}
+                height={50}
+                src={sessionData.user.image ? sessionData.user.image : ''}
+                className="rounded-full"
+              />
+              <p className="text-lg">{sessionData.user.name}</p>
+            </div>
+          )}
+          <AuthShowcase />
           <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
             Combo <span className="text-[hsl(280,100%,70%)]">App</span>
           </h1>
@@ -72,17 +87,14 @@ const Home: NextPage = () => {
               setIsCreatingList={setIsCreatingList}
             />
           )}
-          {isLoading ? (
+          {sessionData?.user ? (
+            <>{renderComboLists}</>
+          ) : sessionData?.user && isLoading ? (
             <div>Loading combolists...</div>
           ) : isError || isRefetchError ? (
             <div>An Error occured!</div>
           ) : (
-            <>
-              {renderComboLists}
-              <div className="flex flex-col items-center gap-2">
-                <AuthShowcase />
-              </div>
-            </>
+            ''
           )}
         </div>
       </main>
@@ -95,19 +107,8 @@ export default Home;
 const AuthShowcase: React.FC = () => {
   const { data: sessionData } = useSession();
 
-  const { data: secretMessage } = api.user.getSecretMessage.useQuery(
-    undefined, // no input
-    { enabled: sessionData?.user !== undefined }
-  );
-
-  console.log(sessionData);
-
   return (
     <div className="flex flex-col items-center justify-center gap-4">
-      <p className="text-center text-2xl text-white">
-        {sessionData && <span>Logged in as {sessionData.user?.name}</span>}
-        {secretMessage && <span> - {secretMessage}</span>}
-      </p>
       <button
         className="rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
         onClick={
