@@ -1,12 +1,8 @@
 import { z } from 'zod';
-import {
-  createTRPCRouter,
-  publicProcedure,
-  protectedProcedure,
-} from '~/server/api/trpc';
+import { createTRPCRouter, protectedProcedure } from '~/server/api/trpc';
 
 export const comboListRouter = createTRPCRouter({
-  getComboLists: publicProcedure
+  getComboLists: protectedProcedure
     .input(z.object({ userId: z.string() }))
     .query(({ input, ctx }) => {
       return ctx.prisma.comboList.findMany({
@@ -21,8 +17,7 @@ export const comboListRouter = createTRPCRouter({
       });
     }),
 
-  // Should be protected
-  getComboList: publicProcedure
+  getComboList: protectedProcedure
     .input(z.object({ id: z.number().int() }))
     .query(({ input, ctx }) => {
       return ctx.prisma.comboList.findUnique({
@@ -35,7 +30,7 @@ export const comboListRouter = createTRPCRouter({
       });
     }),
 
-  addComboList: publicProcedure
+  addComboList: protectedProcedure
     .input(
       z.object({
         title: z.string(),
@@ -51,7 +46,7 @@ export const comboListRouter = createTRPCRouter({
       });
     }),
 
-  updateComboList: publicProcedure
+  updateComboList: protectedProcedure
     .input(
       z.object({
         title: z.string(),
@@ -70,7 +65,7 @@ export const comboListRouter = createTRPCRouter({
     }),
 
   // Needs to be protected route in the future
-  removeComboList: publicProcedure
+  removeComboList: protectedProcedure
     .input(z.object({ id: z.number().int() }))
     .mutation(({ input, ctx }) => {
       return ctx.prisma.comboList.delete({
