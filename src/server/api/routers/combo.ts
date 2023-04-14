@@ -1,12 +1,8 @@
 import { z } from 'zod';
-import {
-  createTRPCRouter,
-  publicProcedure,
-  protectedProcedure,
-} from '~/server/api/trpc';
+import { createTRPCRouter, protectedProcedure } from '~/server/api/trpc';
 
 export const comboRouter = createTRPCRouter({
-  addComboToList: publicProcedure
+  addComboToList: protectedProcedure
     .input(
       z.object({
         comboListId: z.number().int(),
@@ -26,7 +22,7 @@ export const comboRouter = createTRPCRouter({
       });
     }),
 
-  updateCombo: publicProcedure
+  updateCombo: protectedProcedure
     .input(
       z.object({
         id: z.number().int(),
@@ -48,7 +44,7 @@ export const comboRouter = createTRPCRouter({
       });
     }),
 
-  removeCombo: publicProcedure
+  removeCombo: protectedProcedure
     .input(z.object({ id: z.number().int() }))
     .mutation(({ input, ctx }) => {
       return ctx.prisma.combo.delete({
