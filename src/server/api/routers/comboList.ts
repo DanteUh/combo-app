@@ -64,7 +64,6 @@ export const comboListRouter = createTRPCRouter({
       });
     }),
 
-  // Needs to be protected route in the future
   removeComboList: protectedProcedure
     .input(z.object({ id: z.number().int() }))
     .mutation(({ input, ctx }) => {

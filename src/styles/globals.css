@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 body {
-  @apply min-h-screen w-full bg-gradient-to-b from-[#2a2a2a] to-[#123970] text-white;
+  @apply min-h-screen w-full bg-gradient-to-b from-[#262b6e] to-[#a63919] text-white;
 }
