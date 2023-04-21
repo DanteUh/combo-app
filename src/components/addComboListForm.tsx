@@ -43,7 +43,7 @@ const AddComboListForm: FC<IAddComboListForm> = ({
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className="mb-5 flex w-full flex-col justify-start">
-        <h2 className="text-md mb-2 text-start font-extrabold tracking-tight text-white sm:text-[2rem]">
+        <h2 className="text-md mb-2 text-start font-extrabold tracking-tight text-white sm:text-[1.5rem]">
           New combo list
         </h2>
         <label htmlFor="title" className="mb-3 block">
@@ -53,7 +53,7 @@ const AddComboListForm: FC<IAddComboListForm> = ({
           type="text"
           id="title"
           placeholder="List Title"
-          className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base text-neutral-800 outline-none focus:border-2"
+          className="w-full rounded-md border border-[#e0e0e0] bg-white py-2 px-3 text-base text-neutral-800 outline-none focus:border-2"
           required
           aria-required
           {...register('title')}
@@ -65,13 +65,13 @@ const AddComboListForm: FC<IAddComboListForm> = ({
       <div>
         <button
           type="button"
-          className="mt-3 mr-3 inline-flex w-full justify-center rounded-md bg-white px-5 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 transition-all duration-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+          className="mr-3 inline-flex w-full justify-center rounded-sm bg-white px-5 py-2 text-sm font-semibold text-gray-900 transition-all duration-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
           onClick={() => setIsCreatingList(false)}
         >
           Cancel
         </button>
         <button
-          className="rounded-md bg-green-600 bg-opacity-80 px-5 py-2 font-bold transition-all duration-300 hover:bg-opacity-100"
+          className="inline-flex w-full justify-center rounded-sm bg-green-600 bg-opacity-80 px-8 py-2 text-sm font-semibold transition-all duration-300 hover:bg-opacity-100 sm:mt-0 sm:w-auto"
           onClick={() => setIsCreatingList(true)}
         >
           Submit

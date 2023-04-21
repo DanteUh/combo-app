@@ -70,7 +70,7 @@ const Navbar: React.FC = () => {
                   </div>
                   {toggleProfileMenu && (
                     <div
-                      className="absolute right-0 z-10 mt-2 flex w-48 origin-top-right items-center justify-between rounded-md bg-gray-600 px-4 py-2 shadow-lg ring-1 ring-black ring-opacity-5 transition-all duration-500 focus:outline-none"
+                      className="absolute right-0 z-10 mt-2 flex w-48 origin-top-right items-center justify-between rounded-md bg-gray-900 px-4 py-2 shadow-lg ring-1 ring-black ring-opacity-5 transition-all duration-500 focus:outline-none"
                       role="menu"
                       aria-orientation="vertical"
                       aria-labelledby="user-menu-button"
@@ -78,7 +78,7 @@ const Navbar: React.FC = () => {
                     >
                       <p className="font-bold">{sessionData?.user.name}</p>
                       <button
-                        className="block text-sm text-red-500"
+                        className="block text-sm text-red-500 hover:underline"
                         role="menuitem"
                         tabIndex={-1}
                         id="user-menu-item-2"

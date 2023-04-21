@@ -43,70 +43,73 @@ const ComboListCard: FC<IComboListCardProps> = ({
   };
 
   return (
-    <section className="flex w-2/4 max-w-md flex-col items-center justify-center rounded-md border-2 border-purple-500 bg-neutral-800">
+    <section className="flex flex-col items-center justify-between rounded-md border-2 border-purple-500 bg-neutral-800">
       {edit ? (
         <form className="w-full p-5" onSubmit={handleSubmit(onSubmit)}>
           <label htmlFor="title" className="mb-1 block">
             Title
           </label>
-          <input
+          <textarea
+            rows={2}
             className={`${
               errors?.title?.message
                 ? 'border-red-500 focus:border-red-500 focus-visible:border-red-500'
                 : 'border-white'
-            } w-full rounded-md border bg-transparent p-2 text-2xl font-extrabold tracking-tight text-white sm:text-[2rem]`}
+            } w-full rounded-md border bg-transparent p-2 tracking-tight text-white`}
             defaultValue={title}
             {...register('title')}
           />
           {errors?.title?.message && (
             <p className="text-red-500">{errors.title.message}</p>
           )}
-          <button
-            className="mt-3 rounded-md bg-green-600 bg-opacity-80 px-6 py-2 font-bold transition-all duration-300 hover:bg-opacity-100"
-            type="submit"
-          >
-            Save
-          </button>
+          <div className="mt-3 flex w-full justify-end">
+            <button
+              type="button"
+              className="mr-3 inline-flex w-full justify-center rounded-sm bg-white px-5 py-2 text-sm font-semibold text-gray-900 transition-all duration-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+              aria-label={`Edit ${title} combolist`}
+              onClick={() => {
+                edit &&
+                  reset({
+                    title,
+                  });
+                setEdit(!edit);
+              }}
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              className="inline-flex w-full justify-center rounded-sm bg-green-600 bg-opacity-80 px-8 py-2 text-sm font-semibold transition-all duration-300 hover:bg-opacity-100 sm:mt-0 sm:w-auto"
+            >
+              Save
+            </button>
+          </div>
         </form>
       ) : (
-        <Link href={`/combo-list/${id}`} className="w-full p-5 pb-0">
-          <h2 className="m-2 w-full text-start text-2xl font-extrabold tracking-tight text-white sm:text-[2rem]">
-            {title}
-          </h2>
-        </Link>
+        <>
+          <Link href={`/combo-list/${id}`} className="h-full w-full p-5 pb-0">
+            <h2 className="w-full text-start text-xl font-extrabold tracking-tight text-white sm:text-[1.5rem]">
+              {title}
+            </h2>
+          </Link>
+          <div className="mt-5 flex w-full flex-row justify-end p-5 pt-0">
+            <button
+              className="mr-3 rounded-sm border border-red-600 bg-transparent px-5 text-sm transition-all duration-200 hover:bg-red-600"
+              aria-label={`Delete ${title} combolist`}
+              onClick={() => removeComboList(id)}
+            >
+              Delete
+            </button>
+            <button
+              className="rounded-sm border border-yellow-600 bg-transparent py-1 px-5 transition-all duration-200 hover:bg-yellow-600"
+              aria-label={`Edit ${title} combolist`}
+              onClick={() => setEdit(!edit)}
+            >
+              Edit
+            </button>
+          </div>
+        </>
       )}
-      <div className="mt-5 flex w-full flex-row p-5 pt-0">
-        <button
-          className="mr-3 rounded-sm border border-red-600 bg-transparent py-1 px-5 transition-all duration-200 hover:bg-red-600"
-          aria-label={`Delete ${title} combolist`}
-          onClick={() => removeComboList(id)}
-        >
-          Delete
-        </button>
-        {edit ? (
-          <button
-            className="rounded-sm border border-yellow-600 bg-transparent py-1 px-5 transition-all duration-200 hover:bg-yellow-600"
-            aria-label={`Edit ${title} combolist`}
-            onClick={() => {
-              edit &&
-                reset({
-                  title,
-                });
-              setEdit(!edit);
-            }}
-          >
-            Cancel
-          </button>
-        ) : (
-          <button
-            className="rounded-sm border border-yellow-600 bg-transparent py-1 px-5 transition-all duration-200 hover:bg-yellow-600"
-            aria-label={`Edit ${title} combolist`}
-            onClick={() => setEdit(!edit)}
-          >
-            Edit
-          </button>
-        )}
-      </div>
     </section>
   );
 };
