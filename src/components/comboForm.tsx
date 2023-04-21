@@ -41,7 +41,7 @@ const ComboForm: FC<IAddComboForm> = ({
           {formTitle}
         </h2>
         <div className="mb-5">
-          <label htmlFor="title" className="mb-3 block">
+          <label htmlFor="title" className="mb-2 block">
             Title*
           </label>
           <input
@@ -58,7 +58,7 @@ const ComboForm: FC<IAddComboForm> = ({
           )}
         </div>
         <div className="mb-5">
-          <label htmlFor="notation" className="mb-3 block">
+          <label htmlFor="notation" className="mb-2 block">
             Notation*
           </label>
           <textarea
@@ -76,7 +76,7 @@ const ComboForm: FC<IAddComboForm> = ({
             <p className="text-red-400">{errors.notation?.message}</p>
           )}
         </div>
-        <label htmlFor="notes" className="mb-3 block">
+        <label htmlFor="notes" className="mb-2 block">
           Notes
         </label>
         <input
