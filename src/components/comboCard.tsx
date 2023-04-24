@@ -51,13 +51,13 @@ const ComboCard: FC<IComboCardProps> = ({
   return (
     <>
       {!edit ? (
-        <div className="w-full rounded-lg border border-pink-500 bg-neutral-800 p-5 md:w-3/4 xl:w-2/4">
-          <h2 className="mb-5 w-full text-start text-2xl font-extrabold tracking-tight text-white sm:text-[2rem]">
+        <div className="w-full border-y border-y-white bg-neutral-800/60 p-5">
+          <h2 className="mb-5 w-full text-xl font-extrabold tracking-tight text-white sm:text-[1.5rem]">
             {title}
           </h2>
           <p className="text-lg font-bold">{notation}</p>
           {notes && (
-            <p className="mt-3">
+            <p className="mt-3 font-extralight">
               <i>Notes: {notes}</i>
             </p>
           )}
@@ -83,11 +83,7 @@ const ComboCard: FC<IComboCardProps> = ({
                 className="rounded-sm border border-yellow-600 bg-transparent py-1 px-5 transition-all duration-200 hover:bg-yellow-600"
                 aria-label={`Edit ${title} combolist`}
                 onClick={() => {
-                  edit &&
-                    /* reset({
-                      title,
-                    }); */
-                    setEdit(!edit);
+                  edit && setEdit(!edit);
                 }}
               >
                 Cancel

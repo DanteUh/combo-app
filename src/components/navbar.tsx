@@ -10,7 +10,7 @@ const Navbar: React.FC = () => {
 
   return (
     <div className="min-h-full">
-      <nav className="bg-gray-800">
+      <nav className="bg-gray-900/80">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             <div className="flex items-center">
@@ -70,7 +70,7 @@ const Navbar: React.FC = () => {
                   </div>
                   {toggleProfileMenu && (
                     <div
-                      className="absolute right-0 z-10 mt-2 flex w-48 origin-top-right items-center justify-between rounded-md bg-gray-900 px-4 py-2 shadow-lg ring-1 ring-black ring-opacity-5 transition-all duration-500 focus:outline-none"
+                      className="absolute right-0 z-10 mt-2 flex w-48 origin-top-right items-center justify-between rounded-sm bg-gray-900 px-4 py-2 shadow-lg ring-1 ring-black ring-opacity-5 transition-all duration-500 focus:outline-none"
                       role="menu"
                       aria-orientation="vertical"
                       aria-labelledby="user-menu-button"
@@ -146,7 +146,7 @@ const Navbar: React.FC = () => {
             <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
               <a
                 href="#"
-                className="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white"
+                className="block rounded-md px-3 py-2 text-base font-medium text-white hover:underline"
                 aria-current="page"
               >
                 ComboLists
@@ -177,7 +177,7 @@ const Navbar: React.FC = () => {
                       </div>
                     </div>
                     <button
-                      className="block rounded-md border border-red-500 px-3 py-2 text-base font-medium text-white hover:bg-gray-700 hover:text-white"
+                      className="block rounded-sm border border-red-500 px-5 py-1 text-base font-medium text-white hover:bg-gray-700 hover:text-white"
                       role="menuitem"
                       tabIndex={-1}
                       id="user-menu-item-2"

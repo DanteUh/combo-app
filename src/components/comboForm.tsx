@@ -32,12 +32,12 @@ const ComboForm: FC<IAddComboForm> = ({
 
   return (
     <form
-      className="flex w-full
-      flex-col items-start justify-center rounded-md border-2 border-purple-500 bg-neutral-800 p-5 md:w-3/4 xl:w-2/4"
+      className="mb-3 flex w-full flex-col items-start
+      justify-center border-2 border-cyan-600 bg-neutral-800/60 p-5"
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className="mb-5 flex w-full flex-col justify-start">
-        <h2 className="text-md mb-2 text-start font-extrabold tracking-tight text-white sm:text-[2rem]">
+        <h2 className="mb-5 w-full text-xl font-extrabold tracking-tight text-white sm:text-[1.5rem]">
           {formTitle}
         </h2>
         <div className="mb-5">
@@ -49,7 +49,7 @@ const ComboForm: FC<IAddComboForm> = ({
             id="title"
             defaultValue={defaultValues?.title ? defaultValues?.title : ''}
             placeholder="Title"
-            className="mb-1 w-full rounded-md border border-[#e0e0e0] bg-white p-3 text-base text-neutral-800 outline-none focus:border-2 focus:shadow-inner"
+            className="w-full rounded-md border border-[#e0e0e0] bg-white py-2 px-3 text-base text-neutral-800 outline-none focus:border-2"
             aria-required
             {...register('title')}
           />
@@ -68,7 +68,7 @@ const ComboForm: FC<IAddComboForm> = ({
               defaultValues?.notation ? defaultValues?.notation : ''
             }
             placeholder="Notation"
-            className="mb-1 w-full rounded-md border border-[#e0e0e0] bg-white p-3 text-base text-neutral-800 outline-none focus:border-2 focus:shadow-inner"
+            className="w-full rounded-md border border-[#e0e0e0] bg-white py-2 px-3 text-base text-neutral-800 outline-none focus:border-2"
             aria-required
             {...register('notation')}
           />
@@ -84,7 +84,7 @@ const ComboForm: FC<IAddComboForm> = ({
           id="notes"
           defaultValue={defaultValues?.notes ? defaultValues?.notes : ''}
           placeholder="Notes"
-          className="w-full rounded-md border border-[#e0e0e0] bg-white p-3 text-base text-neutral-800 outline-none focus:border-2 focus:shadow-inner"
+          className="w-full rounded-md border border-[#e0e0e0] bg-white py-2 px-3 text-base text-neutral-800 outline-none focus:border-2"
           {...register('notes')}
         />
       </div>

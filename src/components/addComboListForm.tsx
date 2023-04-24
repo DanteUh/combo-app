@@ -39,7 +39,7 @@ const AddComboListForm: FC<IAddComboListForm> = ({
 
   return (
     <form
-      className="flex w-2/4 max-w-md flex-col items-start justify-center rounded-md border-2 border-purple-500 bg-neutral-800 p-5"
+      className="mb-5 flex w-2/4 max-w-md flex-col items-start justify-center rounded-md border-2 border-purple-500 bg-neutral-800 p-5"
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className="mb-5 flex w-full flex-col justify-start">
