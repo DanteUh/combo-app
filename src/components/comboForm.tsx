@@ -26,9 +26,7 @@ const ComboForm: FC<IAddComboForm> = ({
   } = useForm<ComboFormSchema>({
     resolver: zodResolver(comboFormSchema),
   });
-  const formTitle = defaultValues?.title
-    ? defaultValues.title
-    : 'Add new combo';
+  const formTitle = defaultValues?.title ? defaultValues.title : 'New combo';
 
   return (
     <form
@@ -62,7 +60,7 @@ const ComboForm: FC<IAddComboForm> = ({
             Notation*
           </label>
           <textarea
-            rows={3}
+            rows={5}
             id="notation"
             defaultValue={
               defaultValues?.notation ? defaultValues?.notation : ''
@@ -88,19 +86,19 @@ const ComboForm: FC<IAddComboForm> = ({
           {...register('notes')}
         />
       </div>
-      <div className="mt-3">
+      <div className="flex w-full">
+        <button
+          type="submit"
+          className="mr-3 inline-flex w-1/2 justify-center rounded-sm bg-green-600 bg-opacity-80 px-8 py-2 text-sm font-semibold transition-all duration-300 hover:bg-opacity-100 sm:mt-0 sm:w-auto"
+        >
+          Submit
+        </button>
         <button
           type="button"
-          className="mr-3 inline-flex w-full justify-center rounded-md bg-white px-5 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 transition-all duration-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+          className="inline-flex w-1/2 justify-center rounded-sm bg-white px-5 py-2 text-sm font-semibold text-gray-900 transition-all duration-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
           onClick={() => setIsCreating(false)}
         >
           Cancel
-        </button>
-        <button
-          type="submit"
-          className="rounded-md bg-green-600 bg-opacity-80 px-5 py-2 font-bold transition-all duration-300 hover:bg-opacity-100"
-        >
-          Submit
         </button>
       </div>
     </form>

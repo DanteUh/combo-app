@@ -39,7 +39,7 @@ const AddComboListForm: FC<IAddComboListForm> = ({
 
   return (
     <form
-      className="mb-5 flex w-2/4 max-w-md flex-col items-start justify-center rounded-md border-2 border-purple-500 bg-neutral-800 p-5"
+      className="mb-5 flex w-full max-w-md flex-col items-start justify-center rounded-md border-2 border-purple-500 bg-neutral-800 p-5 sm:w-2/4"
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className="mb-5 flex w-full flex-col justify-start">
@@ -62,19 +62,19 @@ const AddComboListForm: FC<IAddComboListForm> = ({
           <p className="text-red-400">{errors.title?.message}</p>
         )}
       </div>
-      <div>
+      <div className="flex w-full">
         <button
-          type="button"
-          className="mr-3 inline-flex w-full justify-center rounded-sm bg-white px-5 py-2 text-sm font-semibold text-gray-900 transition-all duration-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
-          onClick={() => setIsCreatingList(false)}
-        >
-          Cancel
-        </button>
-        <button
-          className="inline-flex w-full justify-center rounded-sm bg-green-600 bg-opacity-80 px-8 py-2 text-sm font-semibold transition-all duration-300 hover:bg-opacity-100 sm:mt-0 sm:w-auto"
+          className="mr-3 inline-flex w-1/2 justify-center rounded-sm bg-green-600 bg-opacity-80 px-8 py-2 text-sm font-semibold transition-all duration-300 hover:bg-opacity-100 sm:mt-0 sm:w-auto md:mb-0 md:mr-3"
           onClick={() => setIsCreatingList(true)}
         >
           Submit
+        </button>
+        <button
+          type="button"
+          className="inline-flex w-1/2 justify-center rounded-sm bg-white px-5 py-2 text-sm font-semibold text-gray-900 transition-all duration-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+          onClick={() => setIsCreatingList(false)}
+        >
+          Cancel
         </button>
       </div>
     </form>

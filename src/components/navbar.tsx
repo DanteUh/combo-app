@@ -144,13 +144,13 @@ const Navbar: React.FC = () => {
         {toggleMobileMenu && (
           <div className="md:hidden" id="mobile-menu">
             <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
-              <a
-                href="#"
-                className="block rounded-md px-3 py-2 text-base font-medium text-white hover:underline"
+              <Link
+                href="/"
+                className="px-3 py-2 text-sm font-medium text-white hover:underline"
                 aria-current="page"
               >
-                ComboLists
-              </a>
+                Combo Lists
+              </Link>
             </div>
             <div className="border-t border-gray-700 pb-3 pt-4">
               {sessionData && (
