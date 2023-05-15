@@ -26,18 +26,16 @@ const ComboForm: FC<IAddComboForm> = ({
   } = useForm<ComboFormSchema>({
     resolver: zodResolver(comboFormSchema),
   });
-  const formTitle = defaultValues?.title
-    ? defaultValues.title
-    : 'Add new combo';
+  const formTitle = defaultValues?.title ? defaultValues.title : 'New combo';
 
   return (
     <form
-      className="flex w-full
-      flex-col items-start justify-center rounded-md border-2 border-purple-500 bg-neutral-800 p-5 md:w-3/4 xl:w-2/4"
+      className="mb-3 flex w-full flex-col items-start
+      justify-center border-2 border-cyan-600 bg-neutral-800/60 p-5"
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className="mb-5 flex w-full flex-col justify-start">
-        <h2 className="text-md mb-2 text-start font-extrabold tracking-tight text-white sm:text-[2rem]">
+        <h2 className="mb-5 w-full text-xl font-extrabold tracking-tight text-white sm:text-[1.5rem]">
           {formTitle}
         </h2>
         <div className="mb-5">
@@ -49,7 +47,7 @@ const ComboForm: FC<IAddComboForm> = ({
             id="title"
             defaultValue={defaultValues?.title ? defaultValues?.title : ''}
             placeholder="Title"
-            className="mb-1 w-full rounded-md border border-[#e0e0e0] bg-white p-3 text-base text-neutral-800 outline-none focus:border-2 focus:shadow-inner"
+            className="w-full rounded-md border border-[#e0e0e0] bg-white py-2 px-3 text-base text-neutral-800 outline-none focus:border-2"
             aria-required
             {...register('title')}
           />
@@ -62,13 +60,13 @@ const ComboForm: FC<IAddComboForm> = ({
             Notation*
           </label>
           <textarea
-            rows={3}
+            rows={5}
             id="notation"
             defaultValue={
               defaultValues?.notation ? defaultValues?.notation : ''
             }
             placeholder="Notation"
-            className="mb-1 w-full rounded-md border border-[#e0e0e0] bg-white p-3 text-base text-neutral-800 outline-none focus:border-2 focus:shadow-inner"
+            className="w-full rounded-md border border-[#e0e0e0] bg-white py-2 px-3 text-base text-neutral-800 outline-none focus:border-2"
             aria-required
             {...register('notation')}
           />
@@ -84,23 +82,23 @@ const ComboForm: FC<IAddComboForm> = ({
           id="notes"
           defaultValue={defaultValues?.notes ? defaultValues?.notes : ''}
           placeholder="Notes"
-          className="w-full rounded-md border border-[#e0e0e0] bg-white p-3 text-base text-neutral-800 outline-none focus:border-2 focus:shadow-inner"
+          className="w-full rounded-md border border-[#e0e0e0] bg-white py-2 px-3 text-base text-neutral-800 outline-none focus:border-2"
           {...register('notes')}
         />
       </div>
-      <div className="mt-3">
+      <div className="flex w-full">
+        <button
+          type="submit"
+          className="mr-3 inline-flex w-1/2 justify-center rounded-sm bg-green-600 bg-opacity-80 px-8 py-2 text-sm font-semibold transition-all duration-300 hover:bg-opacity-100 sm:mt-0 sm:w-auto"
+        >
+          Submit
+        </button>
         <button
           type="button"
-          className="mr-3 inline-flex w-full justify-center rounded-md bg-white px-5 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 transition-all duration-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+          className="inline-flex w-1/2 justify-center rounded-sm bg-white px-5 py-2 text-sm font-semibold text-gray-900 transition-all duration-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
           onClick={() => setIsCreating(false)}
         >
           Cancel
-        </button>
-        <button
-          type="submit"
-          className="rounded-md bg-green-600 bg-opacity-80 px-5 py-2 font-bold transition-all duration-300 hover:bg-opacity-100"
-        >
-          Submit
         </button>
       </div>
     </form>
