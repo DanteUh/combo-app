@@ -9,7 +9,7 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Create T3 App</title>
+        <title>Combo App</title>
         <meta name="Combo App" content="Combo Database App" />
         <link
           rel="apple-touch-icon"
