@@ -2,6 +2,7 @@ import { signIn, signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
+import favicon from '../../public/favicon.ico';
 
 const Navbar: React.FC = () => {
   const { data: sessionData } = useSession();
@@ -15,11 +16,15 @@ const Navbar: React.FC = () => {
           <div className="flex h-16 items-center justify-between">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <img
-                  className="h-8 w-8"
-                  src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                  alt="Your Company"
-                />
+                <Link href="/">
+                  <Image
+                    className="h-10 w-10 rounded-full"
+                    width={50}
+                    height={50}
+                    src={favicon}
+                    alt="Brand image"
+                  />
+                </Link>
               </div>
               <div className="hidden md:block">
                 <div className="ml-10 flex items-baseline space-x-4">
@@ -167,7 +172,7 @@ const Navbar: React.FC = () => {
                               ? sessionData.user.image
                               : ''
                           }
-                          alt=""
+                          alt="User profile image"
                         />
                       </div>
                       <div className="ml-3">
