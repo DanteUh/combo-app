@@ -21,7 +21,7 @@ import DeleteModal from '~/components/deleteModal';
 const ComboListPage: NextPage = () => {
   const comboListId = Number(useRouter().query.id);
   const { data: sessionData } = useSession();
-  const { data, refetch, isLoading, isError, isRefetchError } =
+  const { data, refetch, isLoading, isError, isRefetching, isRefetchError } =
     api.comboList.getComboList.useQuery({
       id: comboListId,
     });
@@ -122,9 +122,23 @@ const ComboListPage: NextPage = () => {
       <Head>
         <title>Combo App - {data?.title}</title>
         <meta name={data?.title} content="Combo app" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicon-16x16.png"
+        />
         <link rel="manifest" href="/site.webmanifest" />
       </Head>
       <Navbar />
@@ -178,7 +192,9 @@ const ComboListPage: NextPage = () => {
             ) : (
               <>
                 <h1 className="text-center text-4xl font-extrabold tracking-tight text-white sm:text-left sm:text-[3rem] md:mb-5">
-                  {data?.title}
+                  {data && !(isLoading || isRefetching)
+                    ? data?.title
+                    : 'Loading...'}
                 </h1>
                 {/* <button
                   className="rounded-sm border border-white bg-transparent py-1 px-10 transition-all duration-200 hover:bg-white/20"
@@ -203,10 +219,10 @@ const ComboListPage: NextPage = () => {
                 setIsCreating={setIsCreatingCombo}
               />
             )}
-            {sessionData?.user ? (
+            {sessionData?.user && !(isLoading || isRefetching) ? (
               <div className="flex w-full flex-col gap-3">{renderCombos}</div>
-            ) : sessionData?.user && isLoading ? (
-              <div>Loading combolists...</div>
+            ) : sessionData?.user && (isLoading || isRefetching) ? (
+              <p>Loading combos...</p>
             ) : isError || isRefetchError ? (
               <div>An Error occured fetching combos</div>
             ) : (

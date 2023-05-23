@@ -16,7 +16,7 @@ const Dashboard = ({ userId }: { userId: string }) => {
   });
 
   const apiDeleteComboList = api.comboList.removeComboList.useMutation();
-  const { data, isLoading, isError, refetch, isRefetchError } =
+  const { data, isLoading, isError, refetch, isRefetching, isRefetchError } =
     api.comboList.getComboLists.useQuery({
       userId,
     });
@@ -77,9 +77,9 @@ const Dashboard = ({ userId }: { userId: string }) => {
           <h1 className="text-center text-4xl font-extrabold tracking-tight text-white sm:text-left sm:text-[3rem] md:mb-5">
             Combo Lists
           </h1>
-          <div>
+          <div className="flex w-full flex-col">
             <button
-              className="mb-5 w-full rounded-sm border-2 border-white bg-transparent py-2 px-10 transition-all duration-200 hover:bg-white/10 sm:w-1/3 lg:w-auto"
+              className="mb-5 w-full rounded-sm border-2 border-white bg-transparent py-2 px-10 transition-all duration-200 hover:bg-white/10 sm:w-1/3 lg:w-1/5"
               onClick={() => setIsCreatingList(true)}
             >
               Add list +
@@ -91,12 +91,12 @@ const Dashboard = ({ userId }: { userId: string }) => {
                 setIsCreatingList={setIsCreatingList}
               />
             )}
-            {sessionData ? (
+            {sessionData && !(isLoading || isRefetching) ? (
               <div className="lg:grid-cols grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3">
                 {renderComboLists}
               </div>
-            ) : sessionData && isLoading ? (
-              <div>Loading combolists...</div>
+            ) : sessionData && (isLoading || isRefetching) ? (
+              <p>Loading lists...</p>
             ) : isError || isRefetchError ? (
               <div>An Error occured!</div>
             ) : (
