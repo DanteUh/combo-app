@@ -72,7 +72,7 @@ const Dashboard = ({ userId }: { userId: string }) => {
         toggleModal={toggleModal}
         removeItemHandler={removeComboList}
       />
-      <main className="flex min-h-screen flex-col">
+      <main className="flex min-h-fit flex-col">
         <div className="container relative mx-auto flex max-w-7xl flex-col gap-10 px-4 pt-8 sm:px-6 lg:px-8">
           <h1 className="text-center text-4xl font-extrabold tracking-tight text-white sm:text-left sm:text-[3rem] md:mb-5">
             Combo Lists
@@ -92,7 +92,7 @@ const Dashboard = ({ userId }: { userId: string }) => {
               />
             )}
             {sessionData && !(isLoading || isRefetching) ? (
-              <div className="lg:grid-cols grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3">
+              <div className="lg:grid-cols grid grid-cols-1 gap-5 pb-20 sm:grid-cols-2 md:grid-cols-3">
                 {renderComboLists}
               </div>
             ) : sessionData && (isLoading || isRefetching) ? (

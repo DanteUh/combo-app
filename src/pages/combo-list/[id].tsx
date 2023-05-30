@@ -149,7 +149,7 @@ const ComboListPage: NextPage = () => {
         toggleModal={toggleModal}
         removeItemHandler={removeCombo}
       />
-      <main className="flex min-h-screen flex-col items-center">
+      <main className="flex min-h-fit flex-col items-center">
         <div className="container relative mx-auto flex max-w-7xl flex-col gap-10 px-4 py-8 sm:px-6 lg:px-8">
           <div>
             {editTitle ? (
