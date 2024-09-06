@@ -1,6 +1,7 @@
 # Combo App
 
 To visit: https://combo-app.vercel.app/
+
 Note: Unfortunately right now the DB on Planetscale is no longer up and running and there is no way currently yo log in to the live project.
 
 A Next.js and Tailwind CSS app built with the T3 stack that both holds front and the backend.
